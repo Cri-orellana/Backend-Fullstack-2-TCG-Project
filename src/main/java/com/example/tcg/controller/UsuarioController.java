@@ -20,14 +20,14 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping
-    @Operation(summary = "Listado de Usuarios Registrados", description = List.class)
+    @Operation(summary = "Listado de Usuarios Registrados", description = "")
     public List<Usuario>getAllUsuarios(){
         return usuarioService.getAllUsuarios();
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Obtener usuario por id", description = "")
-    public Usuario getUsuarioById(@PathVariable Integer id) {
+    public Usuario getUsuarioById(@PathVariable String id) {
         return usuarioService.getUsuarioById(id);
     }
 
@@ -37,9 +37,9 @@ public class UsuarioController {
         return usuarioService.saveUsuario(usuario);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @Operation(summary = "Modificar Usuario Existente", description = "")
-    public Usuario updateUsuario(@PathVariable Integer id, @RequestBody Usuario usuario){
+    public Usuario updateUsuario(@RequestBody Usuario usuario,@PathVariable String id){
         Usuario UsuarioRegistrado = usuarioService.getUsuarioById(id);
 
         if(UsuarioRegistrado != null){
@@ -54,7 +54,7 @@ public class UsuarioController {
     
     @DeleteMapping("/{id}")
     @Operation(summary = "Borrar Usuario", description = "")
-    public void borrarUsuario(@PathVariable Integer id){
+    public void borrarUsuario(@PathVariable String id){
         usuarioService.deleteUsuario(id);
     }
 

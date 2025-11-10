@@ -1,8 +1,5 @@
 package com.example.tcg.model;
 
-
-
-import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,19 +9,20 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Data;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Usuario {
+public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String productId;
+    private String franquicia;
+    private String tipo;
+    private String nombreProduto;
+    private Integer precio;
+    private String descripcion;
+    private String urlImagen;
     
-    private String correo;
-    private String password;
-    private String nombreApellido;
-    private String direccion;
     
 }
