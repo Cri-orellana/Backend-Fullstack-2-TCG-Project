@@ -2,8 +2,8 @@ package com.example.tcg.controller;
 
 import com.example.tcg.model.Usuario;
 import com.example.tcg.service.UsuarioService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,31 +14,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/usuarios")
-@Api(value = "Administracion Usuarios")
+@Tag(name = "Administracion Usuarios", description = "CRUD usuarios")
 public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
     @GetMapping
-    @ApiOperation(value = "Listado de Usuarios Registrados", response = List.class)
+    @Operation(summary = "Listado de Usuarios Registrados", description ="Ver listado de usuarios")
     public List<Usuario>getAllUsuarios(){
         return usuarioService.getAllUsuarios();
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "Obtener usuario por id")
+    @Operation(summary =  "Obtener usuario por id")
     public Usuario getUsuarioById(@PathVariable Integer id) {
         return usuarioService.getUsuarioById(id);
     }
 
     @PostMapping
-    @ApiOperation(value = "Añadir nuevo Usuario")
+    @Operation(summary = "Añadir nuevo Usuario")
     public Usuario createUsuario(@RequestBody Usuario usuario){
         return usuarioService.saveUsuario(usuario);
     }
 
     @PutMapping
-    @ApiOperation(value = "Modificar Usuario Existente")
+    @Operation(summary = "Modificar Usuario Existente")
     public Usuario updateUsuario(@PathVariable Integer id, @RequestBody Usuario usuario){
         Usuario UsuarioRegistrado = usuarioService.getUsuarioById(id);
 
@@ -53,7 +53,7 @@ public class UsuarioController {
     }
     
     @DeleteMapping("/{id}")
-    @ApiOperation(value = "Borrar Usuario")
+    @Operation(summary = "Borrar Usuario")
     public void borrarUsuario(@PathVariable Integer id){
         usuarioService.deleteUsuario(id);
     }
